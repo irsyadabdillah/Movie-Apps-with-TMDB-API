@@ -3,12 +3,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_primary"
     tools:context=".screen.home.HomeFragment">
 
-    <TextView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/iv_poster"
+        android:layout_width="match_parent"
+        android:layout_height="260dp">
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_slider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:iss_auto_cycle="true"
+            app:iss_period="3000"
+            app:iss_delay="0" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_gradient_black"/>
+
+        <TextView
+            android:id="@+id/txt_title_discover"
+            android:padding="32dp"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title Movie"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home" />
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Trending"
+            android:textSize="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_trending"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="5"
+            tools:listitem="@layout/list_trending">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Upcoming Movies"
+            android:textSize="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_favorite"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="5"
+            tools:listitem="@layout/list_favorite"/>
+
+    </LinearLayout>
+
+
+
+
 
 
 

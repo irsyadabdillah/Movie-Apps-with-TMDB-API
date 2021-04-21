@@ -1,4 +1,4 @@
-package com.irzstudio.movieapps.screen
+package com.irzstudio.movieapps.screen.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
