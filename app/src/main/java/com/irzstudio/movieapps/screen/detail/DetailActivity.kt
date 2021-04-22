@@ -48,7 +48,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observeCast(){
-        viewModel.castResponse.observe(this, {
+        viewModel.castResponseList.observe(this, {
             adapterCast.setDataCast(it.cast)
         })
     }
@@ -76,11 +76,7 @@ class DetailActivity : AppCompatActivity() {
 
     }*/
 
-    private fun navigationToFavorite(detailResponse: DetailResponse){
-        val intent = Intent(applicationContext, FavoriteFragment::class.java)
-        intent.putExtra("id", detailResponse.id)
-        startActivity(intent)
-    }
+
 
     private fun setListCast(){
         binding.rvCast.setHasFixedSize(true)

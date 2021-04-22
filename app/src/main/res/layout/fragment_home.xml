@@ -70,7 +70,7 @@
             android:textSize="16dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_favorite"
+            android:id="@+id/rv_upcoming"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

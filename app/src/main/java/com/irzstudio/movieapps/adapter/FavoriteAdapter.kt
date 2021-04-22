@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.irzstudio.movieapps.R
-import com.irzstudio.movieapps.listener.OnClickListener
-import com.irzstudio.movieapps.model.datailfilm.DetailResponse
+import com.irzstudio.movieapps.listener.OnClickItemTrending
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
 import com.irzstudio.movieapps.util.Constant
 import kotlinx.android.synthetic.main.list_favorite.view.*
@@ -17,14 +16,9 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
 
     private var list: MutableList<FavoriteEntity> = mutableListOf()
 
-    var onClickListener: OnClickListener? =null
 
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(favoriteEntity: FavoriteEntity){
-
-            itemView.setOnClickListener {
-                onClickListener?.onClickFav(favoriteEntity)
-            }
 
             Glide.with(itemView)
                 .load("${Constant.URL_IMAGE}${favoriteEntity.posterPath}")

@@ -18,8 +18,8 @@ class DetailViewModel : ViewModel() {
     private val _detailResponse = MutableLiveData<DetailResponse>()
     val detailResponse: LiveData<DetailResponse> = _detailResponse
 
-    private val _castResponse = MutableLiveData<CastResponse>()
-    val castResponse: LiveData<CastResponse> = _castResponse
+    private val _castResponseList = MutableLiveData<CastResponse>()
+    val castResponseList: LiveData<CastResponse> = _castResponseList
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
@@ -48,7 +48,7 @@ class DetailViewModel : ViewModel() {
         RetrofitClient.instance.getCast(id).enqueue(object : Callback<CastResponse>{
             override fun onResponse(call: Call<CastResponse>, response: Response<CastResponse>) {
                 response.body()?.let {
-                    _castResponse.postValue(it)
+                    _castResponseList.postValue(it)
                 }
             }
 

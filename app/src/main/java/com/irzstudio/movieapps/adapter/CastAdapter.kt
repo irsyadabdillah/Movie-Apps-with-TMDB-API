@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.irzstudio.movieapps.R
 import com.irzstudio.movieapps.model.cast.Cast
 import com.irzstudio.movieapps.util.Constant
@@ -20,6 +21,7 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.CastViewHolder>() {
 
             Glide.with(itemView)
                 .load("${Constant.URL_IMAGE}${cast.profil}")
+                .apply(RequestOptions.circleCropTransform())
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .into(itemView.iv_cast)
