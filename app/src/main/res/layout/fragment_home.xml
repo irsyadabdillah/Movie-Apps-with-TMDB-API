@@ -36,55 +36,56 @@
 
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Trending"
-            android:textSize="16dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_trending"
-            android:layout_marginTop="8dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="5"
-            tools:listitem="@layout/list_trending">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <TextView
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Upcoming Movies"
-            android:textSize="16dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_upcoming"
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="5"
-            tools:listitem="@layout/list_favorite"/>
+            android:padding="16dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Trending"
+                android:textSize="16dp"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_trending"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/list_trending">
 
+            </androidx.recyclerview.widget.RecyclerView>
 
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Upcoming Movies"
+                android:textSize="16dp"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_upcoming"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/list_favorite"/>
 
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

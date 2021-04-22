@@ -29,7 +29,6 @@ class TrendingAdapter: RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>(
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .into(itemView.iv_trending)
-            itemView.txt_title_trending.text = posterTrending.title
 
         }
     }

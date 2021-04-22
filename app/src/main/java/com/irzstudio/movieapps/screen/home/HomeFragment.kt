@@ -112,8 +112,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setListTrending() {
-        binding.rvTrending.setHasFixedSize(true)
-        binding.rvTrending.adapter = adapterTrending
+        rv_trending.setHasFixedSize(true)
+        rv_trending.adapter = adapterTrending
         adapterTrending.onClickListener = object : OnClickItemTrending{
             override fun onClick(posterTrending: PosterTrending) {
                 navigationToDetailTrending(posterTrending)
@@ -122,8 +122,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setListUpcoming() {
-        binding.rvUpcoming.setHasFixedSize(true)
-        binding.rvUpcoming.adapter = adapterupcoming
+        rv_upcoming.setHasFixedSize(true)
+        rv_upcoming.adapter = adapterupcoming
         adapterupcoming.onClickListener = object : OnClickItemUpcoming{
             override fun onClick(posterUpcoming: PosterUpcoming) {
                 navigationToDetailUpcoming(posterUpcoming)

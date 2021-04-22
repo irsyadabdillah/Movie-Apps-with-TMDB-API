@@ -69,12 +69,6 @@ class DetailActivity : AppCompatActivity() {
         binding.txtDescriptionDetail.text = detailResponse.description
     }
 
-    /*private fun onClickListener(){
-        btn_fav.setOnClickListener {
-            viewModel.saveMovie()
-        }
-
-    }*/
 
     private fun setListCast(){
         binding.rvCast.setHasFixedSize(true)
