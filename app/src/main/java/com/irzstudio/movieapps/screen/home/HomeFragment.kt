@@ -2,29 +2,26 @@ package com.irzstudio.movieapps.screen.home
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
-import com.irzstudio.movieapps.util.Constant.URL_IMAGE
 import com.irzstudio.movieapps.R
-import com.irzstudio.movieapps.adapter.CastAdapter
 import com.irzstudio.movieapps.adapter.TrendingAdapter
 import com.irzstudio.movieapps.adapter.UpcomingAdapter
 import com.irzstudio.movieapps.databinding.FragmentHomeBinding
 import com.irzstudio.movieapps.listener.OnClickItemTrending
 import com.irzstudio.movieapps.listener.OnClickItemUpcoming
-import com.irzstudio.movieapps.model.datailfilm.DetailResponse
 import com.irzstudio.movieapps.model.discover.Discover
 import com.irzstudio.movieapps.model.trending.PosterTrending
 import com.irzstudio.movieapps.model.upcoming.PosterUpcoming
 import com.irzstudio.movieapps.screen.detail.DetailActivity
-import com.irzstudio.movieapps.screen.favorite.FavoriteFragment
+import com.irzstudio.movieapps.util.Constant.URL_IMAGE
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -53,16 +50,18 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
-        viewModel.requestDiscover()
+
         observeDiscover()
+        viewModel.requestDiscover()
 
         setListTrending()
-        viewModel.requestTrending()
         observeTrending()
+        viewModel.requestTrending()
 
         setListUpcoming()
-        viewModel.requestUpcoming()
         observeUpcoming()
+        viewModel.requestUpcoming()
+
     }
 
 
@@ -84,6 +83,7 @@ class HomeFragment : Fragment() {
             adapterupcoming.setDataUpcoming(it)
         })
     }
+
 
     private fun loadImageList(data: ArrayList<Discover>) {
 
@@ -123,7 +123,7 @@ class HomeFragment : Fragment() {
 
     private fun setListUpcoming() {
         binding.rvUpcoming.setHasFixedSize(true)
-        binding.rvUpcoming.adapter = adapterTrending
+        binding.rvUpcoming.adapter = adapterupcoming
         adapterupcoming.onClickListener = object : OnClickItemUpcoming{
             override fun onClick(posterUpcoming: PosterUpcoming) {
                 navigationToDetailUpcoming(posterUpcoming)

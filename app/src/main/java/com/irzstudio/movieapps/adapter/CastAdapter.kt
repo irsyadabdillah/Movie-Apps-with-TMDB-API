@@ -21,9 +21,9 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.CastViewHolder>() {
 
             Glide.with(itemView)
                 .load("${Constant.URL_IMAGE}${cast.profil}")
-                .apply(RequestOptions.circleCropTransform())
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
+                .apply(RequestOptions.circleCropTransform())
                 .into(itemView.iv_cast)
             itemView.txt_name_cast.text = cast.name
         }

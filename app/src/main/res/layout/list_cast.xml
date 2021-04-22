@@ -2,15 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     android:layout_marginRight="16dp">
 
-    <ImageView
-        android:id="@+id/iv_cast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_cast"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        app:cardCornerRadius="72dp">
+
+        <ImageView
+            android:id="@+id/iv_cast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_cast"/>
+
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/txt_name_cast"

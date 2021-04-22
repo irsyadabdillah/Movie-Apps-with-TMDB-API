@@ -4,12 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.irzstudio.movieapps.model.cast.CastResponse
-import com.irzstudio.movieapps.remote.RetrofitClient
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
-import com.irzstudio.movieapps.model.favorite.FavoriteEntity
-import com.irzstudio.movieapps.model.favorite.GenreEntity
-import io.realm.Realm
-import io.realm.RealmList
+import com.irzstudio.movieapps.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -76,8 +76,6 @@ class DetailActivity : AppCompatActivity() {
 
     }*/
 
-
-
     private fun setListCast(){
         binding.rvCast.setHasFixedSize(true)
         binding.rvCast.adapter = adapterCast
