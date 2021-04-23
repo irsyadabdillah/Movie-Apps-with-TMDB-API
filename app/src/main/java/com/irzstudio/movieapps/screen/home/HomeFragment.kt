@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
         image_slider.setImageList(imageList, ScaleTypes.CENTER_CROP)
         image_slider.setItemChangeListener(object : ItemChangeListener {
             override fun onItemChanged(position: Int) {
-                txt_title_discover.text = data[position].title
+                txt_title_discover?.text = data[position].title
             }
         })
     }

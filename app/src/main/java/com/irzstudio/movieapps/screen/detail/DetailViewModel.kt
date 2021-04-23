@@ -5,7 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.irzstudio.movieapps.model.cast.CastResponse
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
+import com.irzstudio.movieapps.model.favorite.FavoriteEntity
+import com.irzstudio.movieapps.model.favorite.GenreEntity
 import com.irzstudio.movieapps.remote.RetrofitClient
+import io.realm.Realm
+import io.realm.RealmList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,8 +44,8 @@ class DetailViewModel : ViewModel() {
         })
     }
 
-    fun requestCast(id: Int){
-        RetrofitClient.instance.getCast(id).enqueue(object : Callback<CastResponse>{
+    fun requestCast(id: Int) {
+        RetrofitClient.instance.getCast(id).enqueue(object : Callback<CastResponse> {
             override fun onResponse(call: Call<CastResponse>, response: Response<CastResponse>) {
                 response.body()?.let {
                     _castResponseList.postValue(it)
@@ -52,12 +56,11 @@ class DetailViewModel : ViewModel() {
                 t.printStackTrace()
                 _errorMessage.postValue(t.localizedMessage)
             }
-
         })
     }
 
-    /*fun saveMovie() {
-        val detail = _detailResponseList.value!!
+    fun saveMovie() {
+        val detail = _detailResponse.value!!
 
         val genreEntities: List<GenreEntity> = detail.genres.map {
             GenreEntity(it.id, it.nameGenre)
@@ -67,17 +70,31 @@ class DetailViewModel : ViewModel() {
 
         val favorite = FavoriteEntity(
             id = detail.id,
-            genres = realmListEntities
+            genres = realmListEntities,
+            backdropPath = detail.backdropPath,
+            posterPath = detail.posterPath,
+            originalTitle = detail.originalTitle,
+            releaseDate = detail.releaseDate,
         )
 
         Realm.getDefaultInstance().executeTransaction {
             it.insert(favorite)
         }
 
-        val favoriteList : List<FavoriteEntity> = Realm.getDefaultInstance().copyFromRealm(Realm.getDefaultInstance().where(FavoriteEntity::class.java).findAll())
+        /*val favoriteList: List<FavoriteEntity> = Realm.getDefaultInstance()
+            .copyFromRealm(Realm.getDefaultInstance().where(FavoriteEntity::class.java).findAll())
 
-        val id : Int = 100
-        val fav = Realm.getDefaultInstance().where(FavoriteEntity::class.java).equalTo("id", id).findFirst()
-        val isMovieFavorite = fav != null
-    }*/
+        val id: Int = 100
+        val fav = Realm.getDefaultInstance().where(FavoriteEntity::class.java).equalTo("id", id)
+            .findFirst()
+        val isMovieFavorite = fav != null*/
+    }
+
+    fun removeMovie(){
+        val detail = _detailResponse.value!!
+
+        Realm.getDefaultInstance().executeTransaction {
+            it.where(FavoriteEntity::class.java).equalTo("id", detail.id).findAll().deleteFirstFromRealm()
+        }
+    }
 }

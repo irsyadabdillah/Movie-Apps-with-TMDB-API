@@ -3,6 +3,7 @@ package com.irzstudio.movieapps.screen.detail
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -38,6 +39,20 @@ class DetailActivity : AppCompatActivity() {
         viewModel.requestDetailMovie(id)
         observeDetailMovie()
 
+        addFavoriteMovie()
+
+    }
+
+    private fun addFavoriteMovie(){
+        cb_fav.setOnCheckedChangeListener { checkBox, isChecked ->
+            if (isChecked){
+                viewModel.saveMovie()
+                Toast.makeText(this, "Movie added to favorite", Toast.LENGTH_SHORT).show()
+            }else{
+                viewModel.removeMovie()
+                Toast.makeText(this, "Movie removed from favorite", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun observeDetailMovie(){
@@ -68,7 +83,6 @@ class DetailActivity : AppCompatActivity() {
         binding.txtDurationDetail.text = detailResponse.duration.toString()
         binding.txtDescriptionDetail.text = detailResponse.description
     }
-
 
     private fun setListCast(){
         binding.rvCast.setHasFixedSize(true)

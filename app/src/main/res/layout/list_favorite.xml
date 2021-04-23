@@ -66,11 +66,14 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_favorite_24"
-                android:padding="16dp"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_fav_list"
+                android:layout_width="29dp"
+                android:padding="16dp"
+                android:layout_height="match_parent"
+                android:button="@drawable/favorite_list"
+                android:gravity="center_horizontal"
+                app:useMaterialThemeColors="false" />
 
 
         </LinearLayout>
