@@ -21,6 +21,9 @@ class DetailViewModel : ViewModel() {
     private val _castResponseList = MutableLiveData<CastResponse>()
     val castResponseList: LiveData<CastResponse> = _castResponseList
 
+    private val _isfavorited = MutableLiveData<Boolean>()
+    val isFavorited: LiveData<Boolean> = _isfavorited
+
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
@@ -96,5 +99,11 @@ class DetailViewModel : ViewModel() {
         Realm.getDefaultInstance().executeTransaction {
             it.where(FavoriteEntity::class.java).equalTo("id", detail.id).findAll().deleteFirstFromRealm()
         }
+    }
+
+    fun checkFavMovie(){
+        val isFavorited = Realm.getDefaultInstance().where(FavoriteEntity::class.java).equalTo("id", _detailResponse.value!!.id)
+            .findFirst()!=null
+        _isfavorited.postValue(isFavorited)
     }
 }

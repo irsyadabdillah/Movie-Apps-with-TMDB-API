@@ -33,6 +33,9 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .into(itemView.iv_detail_fav)
+            itemView.txt_title_favorite.text = favoriteEntity.originalTitle
+            itemView.txt_year_favorite.text = favoriteEntity.releaseDate
+            itemView.txt_genre_favorite.text = favoriteEntity.genres.map { it.name }.joinToString { "-" }
         }
     }
 

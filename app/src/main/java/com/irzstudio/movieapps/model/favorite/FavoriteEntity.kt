@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey
 open class FavoriteEntity(
     @PrimaryKey
     var id: Int = 0,
-    var backdropPath: String = "",
+    var backdropPath: String? = null,
     var genres: RealmList<GenreEntity> = RealmList(),
     var posterPath: String = "",
     var originalTitle: String = "",

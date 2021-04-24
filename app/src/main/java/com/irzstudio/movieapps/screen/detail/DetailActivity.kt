@@ -33,13 +33,14 @@ class DetailActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
 
         setListCast()
+
         observeCast()
-        viewModel.requestCast(id)
-
-        viewModel.requestDetailMovie(id)
         observeDetailMovie()
+        observeIsFavorited()
 
-        addFavoriteMovie()
+        viewModel.requestCast(id)
+        viewModel.requestDetailMovie(id)
+
 
     }
 
@@ -59,6 +60,15 @@ class DetailActivity : AppCompatActivity() {
         viewModel.detailResponse.observe(this, {
             loadPoster(it)
             loadDetail(it)
+            viewModel.checkFavMovie()
+
+        })
+    }
+
+    private fun observeIsFavorited(){
+        viewModel.isFavorited.observe(this,{
+            cb_fav.isChecked = it
+            addFavoriteMovie()
         })
     }
 

@@ -69,10 +69,9 @@
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/cb_fav_list"
                 android:layout_width="29dp"
-                android:padding="16dp"
-                android:layout_height="match_parent"
+                android:layout_height="31dp"
+                android:layout_margin="16dp"
                 android:button="@drawable/favorite_list"
-                android:gravity="center_horizontal"
                 app:useMaterialThemeColors="false" />
 
 

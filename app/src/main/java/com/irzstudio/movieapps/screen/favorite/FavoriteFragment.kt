@@ -1,5 +1,6 @@
 package com.irzstudio.movieapps.screen.favorite
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,8 +13,10 @@ import com.irzstudio.movieapps.adapter.FavoriteAdapter
 import com.irzstudio.movieapps.adapter.TrendingAdapter
 import com.irzstudio.movieapps.listener.OnClickItemFavorite
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
+import com.irzstudio.movieapps.screen.detail.DetailActivity
 import com.irzstudio.movieapps.screen.detail.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_favorite.*
+import kotlinx.android.synthetic.main.list_favorite.*
 
 class FavoriteFragment : Fragment() {
 
@@ -34,9 +37,9 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(FavoriteViewModel::class.java)
 
-        viewModel.loadFovoriteData()
         setListFavorite()
         observeFavoriteList()
+        viewModel.loadFovoriteData()
 
     }
 
@@ -51,11 +54,13 @@ class FavoriteFragment : Fragment() {
         rv_favorite.adapter = adapterFavorite
         adapterFavorite.onClickItemFavorite = object : OnClickItemFavorite {
             override fun onClick(favoriteEntity: FavoriteEntity) {
-                TODO("Not yet implemented")
+                val intent = Intent(activity, DetailActivity::class.java)
+                intent.putExtra("id", favoriteEntity.id)
+                startActivity(intent)
             }
 
             override fun onClickFav(favoriteEntity: FavoriteEntity) {
-                TODO("Not yet implemented")
+                viewModel.removeMovie()
             }
 
         }
