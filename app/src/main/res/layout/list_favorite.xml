@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:apps="http://schemas.android.com/tools"
     android:layout_marginBottom="16dp">
 
     <androidx.cardview.widget.CardView
@@ -17,8 +18,8 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="140dp"
-                android:layout_height="180dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 app:cardElevation="6dp"
                 android:layout_marginRight="8dp"
                 app:cardCornerRadius="8dp">
@@ -45,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Title"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -54,6 +55,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="12sp"
                     android:text="Year"/>
 
                 <TextView
@@ -62,13 +64,14 @@
                     android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Genre"/>
+                    android:textSize="12sp"
+                    apps:text="Genre"/>
 
             </LinearLayout>
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/cb_fav_list"
-                android:layout_width="29dp"
+                android:layout_width="25dp"
                 android:layout_height="31dp"
                 android:layout_margin="16dp"
                 android:button="@drawable/favorite_list"

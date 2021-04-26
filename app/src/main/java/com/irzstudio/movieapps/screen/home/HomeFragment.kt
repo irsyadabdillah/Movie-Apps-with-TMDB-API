@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
     private val adapterTrending: TrendingAdapter by lazy {
         TrendingAdapter()
     }
-    private val adapterupcoming: UpcomingAdapter by lazy {
+    private val adapterUpcoming: UpcomingAdapter by lazy {
         UpcomingAdapter()
     }
 
@@ -48,7 +48,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-
 
         observeDiscover()
         viewModel.requestDiscover()
@@ -79,10 +78,9 @@ class HomeFragment : Fragment() {
 
     private fun observeUpcoming() {
         viewModel.upcomingResponseList.observe(viewLifecycleOwner, {
-            adapterupcoming.setDataUpcoming(it)
+            adapterUpcoming.setDataUpcoming(it)
         })
     }
-
 
     private fun loadImageList(data: ArrayList<Discover>) {
 
@@ -122,8 +120,8 @@ class HomeFragment : Fragment() {
 
     private fun setListUpcoming() {
         rv_upcoming.setHasFixedSize(true)
-        rv_upcoming.adapter = adapterupcoming
-        adapterupcoming.onClickListener = object : OnClickItemUpcoming{
+        rv_upcoming.adapter = adapterUpcoming
+        adapterUpcoming.onClickListener = object : OnClickItemUpcoming{
             override fun onClick(posterUpcoming: PosterUpcoming) {
                 navigationToDetailUpcoming(posterUpcoming)
             }

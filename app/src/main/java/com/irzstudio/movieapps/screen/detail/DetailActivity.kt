@@ -12,6 +12,8 @@ import com.irzstudio.movieapps.util.Constant.URL_IMAGE
 import com.irzstudio.movieapps.databinding.ActivityDetailBinding
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
 import com.irzstudio.movieapps.screen.favorite.FavoriteFragment
+import com.irzstudio.movieapps.screen.home.HomeFragment
+import com.irzstudio.movieapps.screen.main.MainActivity
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -32,6 +34,8 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
 
+        navigationBack()
+
         setListCast()
 
         observeCast()
@@ -40,8 +44,6 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel.requestCast(id)
         viewModel.requestDetailMovie(id)
-
-
     }
 
     private fun addFavoriteMovie(){
@@ -61,7 +63,6 @@ class DetailActivity : AppCompatActivity() {
             loadPoster(it)
             loadDetail(it)
             viewModel.checkFavMovie()
-
         })
     }
 
@@ -74,7 +75,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun observeCast(){
         viewModel.castResponseList.observe(this, {
-            adapterCast.setDataCast(it.cast)
+            adapterCast.setDataCast(it)
         })
     }
 
@@ -97,5 +98,12 @@ class DetailActivity : AppCompatActivity() {
     private fun setListCast(){
         binding.rvCast.setHasFixedSize(true)
         binding.rvCast.adapter = adapterCast
+    }
+
+    private fun navigationBack(){
+        iv_back.setOnClickListener {
+            val intent =Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

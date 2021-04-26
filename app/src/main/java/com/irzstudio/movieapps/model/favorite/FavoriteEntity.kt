@@ -1,19 +1,26 @@
 package com.irzstudio.movieapps.model.favorite
 
-import io.realm.RealmList
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-open class FavoriteEntity(
+
+@Entity(tableName = "favorite")
+data class FavoriteEntity(
     @PrimaryKey
-    var id: Int = 0,
-    var backdropPath: String? = null,
-    var genres: RealmList<GenreEntity> = RealmList(),
-    var posterPath: String = "",
-    var originalTitle: String = "",
-    var releaseDate: String = "",
+    @ColumnInfo(name = "id")
+    val id: Int,
+    @ColumnInfo(name = "backdropPath")
+    val backdropPath: String?,
+    @ColumnInfo(name = "posterPath")
+    val posterPath: String,
+    @ColumnInfo(name = "originalTitle")
+    val originalTitle: String,
+    @ColumnInfo(name = "releaseDate")
+    val releaseDate: String
+)
 
-) : RealmObject()
+
 
 
 

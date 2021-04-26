@@ -11,10 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="300dp">
 
+
         <ImageView
             android:id="@+id/iv_poster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_round_backspace"
+            android:padding="16dp"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -62,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title Movie"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -75,7 +83,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Relese Date"
-                    android:layout_marginRight="16dp"/>
+                    android:layout_marginRight="16dp"
+                    android:textSize="12sp"/>
 
 
                 <TextView
@@ -83,13 +92,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Duration"
-                    android:layout_marginRight="16dp"/>
+                    android:layout_marginRight="16dp"
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/txt_genre_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Genre" />
+                    android:text="Genre"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -99,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Descrintion"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:justificationMode="inter_word"/>
 
             <LinearLayout

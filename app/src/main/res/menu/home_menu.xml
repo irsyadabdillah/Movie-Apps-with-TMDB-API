@@ -11,4 +11,10 @@
         android:icon="@drawable/ic_favorite_outline"
         android:title="Favorite"
         android:color="@color/home"/>
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_round_search"
+        android:title="Search"
+        android:color="@color/home"/>
 </menu>

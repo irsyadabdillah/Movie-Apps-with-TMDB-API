@@ -4,29 +4,33 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
+import com.irzstudio.movieapps.model.favorite.FavoriteDatabase
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
 import io.realm.Realm
 
 class FavoriteViewModel : ViewModel() {
 
-    private val _detailResponse = MutableLiveData<DetailResponse>()
-    val detailResponse: LiveData<DetailResponse> = _detailResponse
-
     private val _favoriteEntityList = MutableLiveData<ArrayList<FavoriteEntity>>()
-    val favoriteEntity: LiveData<ArrayList<FavoriteEntity>> = _favoriteEntityList
+    val favoriteEntityList: LiveData<ArrayList<FavoriteEntity>> = _favoriteEntityList
 
-    fun loadFovoriteData() {
-        val favoriteList: List<FavoriteEntity> = Realm.getDefaultInstance()
-            .copyFromRealm(Realm.getDefaultInstance().where(FavoriteEntity::class.java).findAll())
+    private var database: FavoriteDatabase? = null
+
+    init {
+        database = FavoriteDatabase.getInstance()
     }
 
-    fun removeMovie() {
-        val detail = _detailResponse.value!!
+    private var dataFavorite: ArrayList<FavoriteEntity> = ArrayList()
 
-        Realm.getDefaultInstance().executeTransaction {
-            it.where(FavoriteEntity::class.java).equalTo("id", detail.id).findAll()
-                .deleteFirstFromRealm()
-        }
+    fun loadFovoriteData() {
+        dataFavorite.clear()
+        val dataFromBd = database?.favoriteDao()?.getAll().orEmpty()
+        dataFavorite.addAll(dataFromBd)
+        _favoriteEntityList.postValue(dataFavorite)
+    }
+
+    fun removeMovie(id:Int) {
+        database?.favoriteDao()?.deleteById(id)
+        loadFovoriteData()
     }
 
 }

@@ -1,15 +1,15 @@
 package com.irzstudio.movieapps.screen.detail
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.irzstudio.movieapps.model.cast.Cast
 import com.irzstudio.movieapps.model.cast.CastResponse
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
+import com.irzstudio.movieapps.model.favorite.FavoriteDatabase
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
-import com.irzstudio.movieapps.model.favorite.GenreEntity
 import com.irzstudio.movieapps.remote.RetrofitClient
-import io.realm.Realm
-import io.realm.RealmList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,14 +18,20 @@ class DetailViewModel : ViewModel() {
     private val _detailResponse = MutableLiveData<DetailResponse>()
     val detailResponse: LiveData<DetailResponse> = _detailResponse
 
-    private val _castResponseList = MutableLiveData<CastResponse>()
-    val castResponseList: LiveData<CastResponse> = _castResponseList
+    private val _castResponseList = MutableLiveData<ArrayList<Cast>>()
+    val castResponseList: LiveData<ArrayList<Cast>> = _castResponseList
 
     private val _isfavorited = MutableLiveData<Boolean>()
     val isFavorited: LiveData<Boolean> = _isfavorited
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
+
+    private var database: FavoriteDatabase? = null
+
+    init {
+        database = FavoriteDatabase.getInstance()
+    }
 
     fun requestDetailMovie(id: Int) {
         RetrofitClient.instance.getDetailMovie(id).enqueue(object : Callback<DetailResponse> {
@@ -42,8 +48,6 @@ class DetailViewModel : ViewModel() {
                 t.printStackTrace()
                 _errorMessage.postValue(t.localizedMessage)
             }
-
-
         })
     }
 
@@ -51,7 +55,7 @@ class DetailViewModel : ViewModel() {
         RetrofitClient.instance.getCast(id).enqueue(object : Callback<CastResponse> {
             override fun onResponse(call: Call<CastResponse>, response: Response<CastResponse>) {
                 response.body()?.let {
-                    _castResponseList.postValue(it)
+                    _castResponseList.postValue(it.cast)
                 }
             }
 
@@ -62,48 +66,32 @@ class DetailViewModel : ViewModel() {
         })
     }
 
-    fun saveMovie() {
-        val detail = _detailResponse.value!!
+    fun saveMovie() { //mengambil semua object (yg diperlukan cuma id nya)
 
-        val genreEntities: List<GenreEntity> = detail.genres.map {
-            GenreEntity(it.id, it.nameGenre)
-        }
-        val realmListEntities: RealmList<GenreEntity> = RealmList()
-        realmListEntities.addAll(genreEntities)
+        val detail = _detailResponse.value!!
 
         val favorite = FavoriteEntity(
             id = detail.id,
-            genres = realmListEntities,
             backdropPath = detail.backdropPath,
             posterPath = detail.posterPath,
             originalTitle = detail.originalTitle,
-            releaseDate = detail.releaseDate,
+            releaseDate = detail.releaseDate
         )
-
-        Realm.getDefaultInstance().executeTransaction {
-            it.insert(favorite)
-        }
-
-        /*val favoriteList: List<FavoriteEntity> = Realm.getDefaultInstance()
-            .copyFromRealm(Realm.getDefaultInstance().where(FavoriteEntity::class.java).findAll())
-
-        val id: Int = 100
-        val fav = Realm.getDefaultInstance().where(FavoriteEntity::class.java).equalTo("id", id)
-            .findFirst()
-        val isMovieFavorite = fav != null*/
+        database?.favoriteDao()?.insert(favorite)
     }
 
-    fun removeMovie(){
+
+    fun removeMovie() { //dengan cara membuat query untuk mengambil id nya
         val detail = _detailResponse.value!!
-
-        Realm.getDefaultInstance().executeTransaction {
-            it.where(FavoriteEntity::class.java).equalTo("id", detail.id).findAll().deleteFirstFromRealm()
-        }
+        database?.favoriteDao()?.deleteById(detail.id)
     }
 
-    fun checkFavMovie(){
-        val isFavorited = Realm.getDefaultInstance().where(FavoriteEntity::class.java).equalTo("id", _detailResponse.value!!.id)
-            .findFirst()!=null
+    fun checkFavMovie() {
+        val detail = _detailResponse.value!!
+        val isFavorited = database?.favoriteDao()?.getMovieById(detail.id)?.size != 0
         _isfavorited.postValue(isFavorited)
+
     }
+
+
 }

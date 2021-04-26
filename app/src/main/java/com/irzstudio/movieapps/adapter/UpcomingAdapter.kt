@@ -34,7 +34,6 @@ class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder>(
                 .into(itemView.iv_upcoming)
             itemView.txt_title_upcoming.text = posterUpcoming.title
             itemView.txt_year_upcoming.text = posterUpcoming.releaseDate
-            itemView.txt_genre_upcoming.text = posterUpcoming.genre.joinToString { "-" }
         }
     }
 

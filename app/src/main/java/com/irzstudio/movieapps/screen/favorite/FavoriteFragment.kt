@@ -2,19 +2,18 @@ package com.irzstudio.movieapps.screen.favorite
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.irzstudio.movieapps.R
 import com.irzstudio.movieapps.adapter.FavoriteAdapter
-import com.irzstudio.movieapps.adapter.TrendingAdapter
 import com.irzstudio.movieapps.listener.OnClickItemFavorite
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
 import com.irzstudio.movieapps.screen.detail.DetailActivity
-import com.irzstudio.movieapps.screen.detail.DetailViewModel
+import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlinx.android.synthetic.main.list_favorite.*
 
@@ -43,13 +42,14 @@ class FavoriteFragment : Fragment() {
 
     }
 
-    private fun observeFavoriteList(){
-        viewModel.favoriteEntity.observe(viewLifecycleOwner, {
+    private fun observeFavoriteList() {
+        viewModel.favoriteEntityList.observe(viewLifecycleOwner, {
             adapterFavorite.setDataFavorite(it)
         })
     }
 
-    private fun setListFavorite(){
+
+    private fun setListFavorite() {
         rv_favorite.setHasFixedSize(true)
         rv_favorite.adapter = adapterFavorite
         adapterFavorite.onClickItemFavorite = object : OnClickItemFavorite {
@@ -60,11 +60,12 @@ class FavoriteFragment : Fragment() {
             }
 
             override fun onClickFav(favoriteEntity: FavoriteEntity) {
-                viewModel.removeMovie()
+                viewModel.removeMovie(favoriteEntity.id)
+                Toast.makeText(activity, "Movie removed from favorite", Toast.LENGTH_SHORT).show()
+                observeFavoriteList()
             }
-
         }
-
-
     }
+
+
 }

@@ -76,5 +76,11 @@ dependencies {
 
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
 
+    implementation "androidx.room:room-runtime:2.2.6"
+    kapt "androidx.room:room-compiler:2.2.6"
+
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    kapt 'android.arch.persistence.room:compiler:1.1.1'
+
 
 }

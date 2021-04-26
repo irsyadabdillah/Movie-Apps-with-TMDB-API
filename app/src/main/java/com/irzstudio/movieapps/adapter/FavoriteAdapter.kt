@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.list_favorite.view.*
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     private var list: MutableList<FavoriteEntity> = mutableListOf()
-    var onClickItemFavorite: OnClickItemFavorite?= null
+    var onClickItemFavorite: OnClickItemFavorite? = null
 
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(favoriteEntity: FavoriteEntity) {
@@ -24,9 +24,12 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
                 onClickItemFavorite?.onClick(favoriteEntity)
             }
 
+            itemView.cb_fav_list.isChecked = true
+
             itemView.cb_fav_list.setOnClickListener {
                 onClickItemFavorite?.onClickFav(favoriteEntity)
             }
+
 
             Glide.with(itemView)
                 .load("${Constant.URL_IMAGE}${favoriteEntity.posterPath}")
@@ -35,7 +38,6 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
                 .into(itemView.iv_detail_fav)
             itemView.txt_title_favorite.text = favoriteEntity.originalTitle
             itemView.txt_year_favorite.text = favoriteEntity.releaseDate
-            itemView.txt_genre_favorite.text = favoriteEntity.genres.map { it.name }.joinToString { "-" }
         }
     }
 

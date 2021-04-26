@@ -4,6 +4,7 @@ import com.irzstudio.movieapps.util.Constant
 import com.irzstudio.movieapps.model.cast.CastResponse
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
 import com.irzstudio.movieapps.model.discover.DiscoverResponse
+import com.irzstudio.movieapps.model.search.SearchResponse
 import com.irzstudio.movieapps.model.trending.TrendingResponse
 import com.irzstudio.movieapps.model.upcoming.UpcomingResponse
 import retrofit2.Call
@@ -16,31 +17,40 @@ interface Api {
     fun getTrending(
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ):Call<TrendingResponse>
+    ): Call<TrendingResponse>
 
     @GET("movie/upcoming")
     fun getUpcoming(
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ):Call<UpcomingResponse>
+    ): Call<UpcomingResponse>
 
     @GET("movie/{movie_id}")
     fun getDetailMovie(
         @Path("movie_id") movie: Int,
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ):Call<DetailResponse>
+    ): Call<DetailResponse>
 
     @GET("discover/movie")
     fun getDiscover(
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ):Call<DiscoverResponse>
+    ): Call<DiscoverResponse>
 
     @GET("movie/{cast_id}/credits")
     fun getCast(
         @Path("cast_id") cast: Int,
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ):Call<CastResponse>
+    ): Call<CastResponse>
+
+    @GET("search/movie")
+    fun getSearchMovie(
+        @Query("query") query: String,
+        @Query("api_key") apiKey: String = Constant.API_KEY,
+        @Query("language") lang: String = Constant.LANGUAGE,
+        @Query("page") page: String = Constant.PAGE,
+        @Query("include_adult") adult: String = Constant.INCLUDE_ADULT
+    ): Call<SearchResponse>
 }
