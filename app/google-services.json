@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:640036949310:android:4836f69aaac099bd88706f",
+        "mobilesdk_app_id": "1:640036949310:android:f37c63cf0021f04288706f",
         "android_client_info": {
-          "package_name": "com.irzstudio.movieapps.adapter"
+          "package_name": "com.irzstudio.movieapps"
         }
       },
       "oauth_client": [
