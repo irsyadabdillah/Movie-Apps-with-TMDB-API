@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "640036949310",
+    "project_id": "fir-notification-1d6d1",
+    "storage_bucket": "fir-notification-1d6d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640036949310:android:4836f69aaac099bd88706f",
+        "android_client_info": {
+          "package_name": "com.irzstudio.movieapps.adapter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640036949310-c7m2rih3t7pbe146beco9rqgingc2k5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr2eadtAIV_3jIJQFeujHYo44oGvzTCzg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640036949310-c7m2rih3t7pbe146beco9rqgingc2k5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

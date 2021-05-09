@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'realm-android'
+    id 'com.google.gms.google-services'
 }
 
 
@@ -81,6 +82,9 @@ dependencies {
 
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     kapt 'android.arch.persistence.room:compiler:1.1.1'
+
+    implementation 'com.google.firebase:firebase-bom:26.8.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
 
 
 }
