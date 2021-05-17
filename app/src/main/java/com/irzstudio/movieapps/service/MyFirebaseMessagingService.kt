@@ -12,13 +12,13 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
         super.onNewToken(p0)
 
         val refreshToken = FirebaseInstanceId.getInstance().token
-
         Log.e("refreshToken", refreshToken!!)
     }
 
     override fun onMessageReceived(p0: RemoteMessage) {
         super.onMessageReceived(p0)
         showNotification(p0.notification?.title.toString(), p0.notification?.body.toString())
+
         val checkToken = FirebaseInstanceId.getInstance().token
         Log.d("checkToken", checkToken!!)
     }
