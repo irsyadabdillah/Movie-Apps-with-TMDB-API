@@ -12,8 +12,10 @@ import com.irzstudio.movieapps.listener.OnClickItemUpcoming
 import com.irzstudio.movieapps.model.trending.PosterTrending
 import com.irzstudio.movieapps.model.upcoming.PosterUpcoming
 import com.irzstudio.movieapps.util.Constant
+import kotlinx.android.synthetic.main.list_favorite.view.*
 import kotlinx.android.synthetic.main.list_trending.view.*
 import kotlinx.android.synthetic.main.list_upcoming.view.*
+import kotlinx.android.synthetic.main.list_upcoming.view.rating_bar
 
 class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder>() {
 
@@ -34,6 +36,11 @@ class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder>(
                 .into(itemView.iv_upcoming)
             itemView.txt_title_upcoming.text = posterUpcoming.title
             itemView.txt_year_upcoming.text = posterUpcoming.releaseDate
+
+            val rating = posterUpcoming.rating
+            itemView.rating_bar.numStars = 5
+            itemView.rating_bar.stepSize = 0.5f
+            itemView.rating_bar.rating = rating / 2
         }
     }
 
@@ -48,7 +55,12 @@ class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder>(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return if (list.size >= 8){
+            8
+        }else{
+            list.size
+        }
+
     }
 
     fun setDataUpcoming(data: List<PosterUpcoming>) {

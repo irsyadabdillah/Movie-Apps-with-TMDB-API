@@ -72,6 +72,7 @@ class DetailViewModel : ViewModel() {
 
         val favorite = FavoriteEntity(
             id = detail.id,
+            rating = detail.rating,
             backdropPath = detail.backdropPath,
             posterPath = detail.posterPath,
             originalTitle = detail.originalTitle,

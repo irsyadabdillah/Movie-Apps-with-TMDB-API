@@ -15,6 +15,8 @@ import com.irzstudio.movieapps.screen.favorite.FavoriteFragment
 import com.irzstudio.movieapps.screen.home.HomeFragment
 import com.irzstudio.movieapps.screen.main.MainActivity
 import kotlinx.android.synthetic.main.activity_detail.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -46,6 +48,20 @@ class DetailActivity : AppCompatActivity() {
         viewModel.requestDetailMovie(id)
     }
 
+    private fun shareMovie(detailResponse: DetailResponse){
+        btn_share.setOnClickListener {
+            val url = detailResponse.url
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, url)
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+    }
+
     private fun addFavoriteMovie(){
         cb_fav.setOnCheckedChangeListener { checkBox, isChecked ->
             if (isChecked){
@@ -62,6 +78,8 @@ class DetailActivity : AppCompatActivity() {
         viewModel.detailResponse.observe(this, {
             loadPoster(it)
             loadDetail(it)
+            shareMovie(it)
+            convertDuration(it)
             viewModel.checkFavMovie()
         })
     }
@@ -91,8 +109,15 @@ class DetailActivity : AppCompatActivity() {
         binding.txtTitleDetail.text = detailResponse.originalTitle
         binding.txtReleaseDetail.text = detailResponse.releaseDate
         binding.txtGenreDetail.text = detailResponse.genres.map { it.nameGenre }.joinToString("-")
-        binding.txtDurationDetail.text = detailResponse.duration.toString()
         binding.txtDescriptionDetail.text = detailResponse.description
+    }
+
+    private fun convertDuration(detailResponse: DetailResponse) {
+        val date = detailResponse.duration
+        val hours = date / 60
+        val minutes = date % 60
+        val duration = String.format("%dh:%02dm", hours, minutes)
+        binding.txtDurationDetail.text = duration
     }
 
     private fun setListCast(){

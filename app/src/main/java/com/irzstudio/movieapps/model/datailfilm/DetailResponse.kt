@@ -3,6 +3,10 @@ package com.irzstudio.movieapps.model.datailfilm
 import com.google.gson.annotations.SerializedName
 
 data class DetailResponse(
+    @SerializedName("homepage")
+    val url: String,
+    @SerializedName("vote_average")
+    val rating: Float,
     @SerializedName("backdrop_path")
     val backdropPath: String,
     @SerializedName("genres")

@@ -38,6 +38,11 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
                 .into(itemView.iv_detail_fav)
             itemView.txt_title_favorite.text = favoriteEntity.originalTitle
             itemView.txt_year_favorite.text = favoriteEntity.releaseDate
+
+            val rating = favoriteEntity.rating
+            itemView.rating_bar.numStars = 5
+            itemView.rating_bar.stepSize = 0.5f
+            itemView.rating_bar.rating = rating / 2
         }
     }
 
