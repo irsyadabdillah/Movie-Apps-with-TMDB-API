@@ -1,7 +1,7 @@
 # Movie-Apps-with-TMDB-API
  _This repository with Rest API, Room, MVVM, live data and view binding_
 
-![alt text](https://raw.githubusercontent.com/irsyadabdillah/Movie-Apps-with-TMDB-API/master/asset/github%20foto.png)
+![alt text](https://raw.githubusercontent.com/irsyadabdillah/Movie-Apps-with-TMDB-API/master/asset/Movie%20App.png)
 
 ## Library References
 
