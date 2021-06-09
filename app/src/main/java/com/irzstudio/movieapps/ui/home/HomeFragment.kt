@@ -1,10 +1,8 @@
-package com.irzstudio.movieapps.screen.home
+package com.irzstudio.movieapps.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -20,15 +18,19 @@ import com.irzstudio.movieapps.listener.OnClickItemUpcoming
 import com.irzstudio.movieapps.model.discover.Discover
 import com.irzstudio.movieapps.model.trending.PosterTrending
 import com.irzstudio.movieapps.model.upcoming.PosterUpcoming
-import com.irzstudio.movieapps.screen.detail.DetailActivity
+import com.irzstudio.movieapps.ui.detail.DetailActivity
 import com.irzstudio.movieapps.util.Constant.URL_IMAGE
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private val binding: FragmentHomeBinding by lazy {
+        FragmentHomeBinding.inflate(layoutInflater)
+    }
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelProviders.of(this).get(HomeViewModel::class.java)
+    }
 
     private val adapterTrending: TrendingAdapter by lazy {
         TrendingAdapter()
@@ -37,31 +39,21 @@ class HomeFragment : Fragment() {
         UpcomingAdapter()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
         observeDiscover()
-        viewModel.requestDiscover()
 
         setListTrending()
         observeTrending()
-        viewModel.requestTrending()
 
         setListUpcoming()
         observeUpcoming()
+
+        viewModel.requestDiscover()
+        viewModel.requestTrending()
         viewModel.requestUpcoming()
-
     }
-
 
     private fun observeDiscover() {
         viewModel.discoverResponseList.observe(viewLifecycleOwner, {

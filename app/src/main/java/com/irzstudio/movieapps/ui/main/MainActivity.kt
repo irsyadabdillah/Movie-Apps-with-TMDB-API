@@ -1,12 +1,11 @@
-package com.irzstudio.movieapps.screen.main
+package com.irzstudio.movieapps.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.irzstudio.movieapps.R
-import com.irzstudio.movieapps.databinding.ActivityMainBinding
-import com.irzstudio.movieapps.screen.favorite.FavoriteFragment
-import com.irzstudio.movieapps.screen.home.HomeFragment
-import com.irzstudio.movieapps.screen.search.SearchFragment
+import com.irzstudio.movieapps.ui.favorite.FavoriteFragment
+import com.irzstudio.movieapps.ui.home.HomeFragment
+import com.irzstudio.movieapps.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.favorite -> navigationToFavorite()
                 R.id.search -> navigationToSearch()
             }
-
         }
     }
 
@@ -43,4 +41,5 @@ class MainActivity : AppCompatActivity() {
     private fun navigationToSearch(){
         supportFragmentManager.beginTransaction().replace(R.id.frame_container, SearchFragment()).commit()
     }
+
 }

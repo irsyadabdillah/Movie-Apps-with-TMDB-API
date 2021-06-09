@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MovieApps">
-        <activity android:name=".screen.detail.DetailActivity"></activity>
-        <activity android:name=".screen.main.MainActivity">
+        <activity android:name=".ui.detail.DetailActivity"></activity>
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,6 +8,7 @@
 - Retrofit
 - Room
 - MVVM
+- RXJava
 - Live Data
 - View Binding
 

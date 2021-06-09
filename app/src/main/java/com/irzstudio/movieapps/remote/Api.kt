@@ -7,6 +7,7 @@ import com.irzstudio.movieapps.model.discover.DiscoverResponse
 import com.irzstudio.movieapps.model.search.SearchResponse
 import com.irzstudio.movieapps.model.trending.TrendingResponse
 import com.irzstudio.movieapps.model.upcoming.UpcomingResponse
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET;
 import retrofit2.http.Path
@@ -17,33 +18,33 @@ interface Api {
     fun getTrending(
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ): Call<TrendingResponse>
+    ): Observable<TrendingResponse>
 
     @GET("movie/upcoming")
     fun getUpcoming(
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ): Call<UpcomingResponse>
+    ): Observable<UpcomingResponse>
 
     @GET("movie/{movie_id}")
     fun getDetailMovie(
         @Path("movie_id") movie: Int,
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ): Call<DetailResponse>
+    ): Observable<DetailResponse>
 
     @GET("discover/movie")
     fun getDiscover(
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ): Call<DiscoverResponse>
+    ): Observable<DiscoverResponse>
 
     @GET("movie/{cast_id}/credits")
     fun getCast(
         @Path("cast_id") cast: Int,
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
-    ): Call<CastResponse>
+    ): Observable<CastResponse>
 
     @GET("search/movie")
     fun getSearchMovie(
@@ -52,5 +53,5 @@ interface Api {
         @Query("language") lang: String = Constant.LANGUAGE,
         @Query("page") page: String = Constant.PAGE,
         @Query("include_adult") adult: String = Constant.INCLUDE_ADULT
-    ): Call<SearchResponse>
+    ): Observable<SearchResponse>
 }

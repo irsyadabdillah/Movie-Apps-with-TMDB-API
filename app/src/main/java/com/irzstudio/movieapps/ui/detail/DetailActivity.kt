@@ -1,4 +1,4 @@
-package com.irzstudio.movieapps.screen.detail
+package com.irzstudio.movieapps.ui.detail
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,35 +11,31 @@ import com.irzstudio.movieapps.adapter.CastAdapter
 import com.irzstudio.movieapps.util.Constant.URL_IMAGE
 import com.irzstudio.movieapps.databinding.ActivityDetailBinding
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
-import com.irzstudio.movieapps.screen.favorite.FavoriteFragment
-import com.irzstudio.movieapps.screen.home.HomeFragment
-import com.irzstudio.movieapps.screen.main.MainActivity
+import com.irzstudio.movieapps.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_detail.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailBinding
-    private lateinit var viewModel: DetailViewModel
-
-    private val id: Int by lazy {
-        intent.getIntExtra("id", 0)
+    private val binding: ActivityDetailBinding by lazy {
+        ActivityDetailBinding.inflate(layoutInflater)
+    }
+    private val viewModel: DetailViewModel by lazy {
+        ViewModelProviders.of(this).get(DetailViewModel::class.java)
     }
     private val adapterCast: CastAdapter by lazy {
         CastAdapter()
     }
+    private val id: Int by lazy {
+        intent.getIntExtra("id", 0)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
 
         navigationBack()
-
         setListCast()
-
         observeCast()
         observeDetailMovie()
         observeIsFavorited()
@@ -56,7 +52,6 @@ class DetailActivity : AppCompatActivity() {
                 putExtra(Intent.EXTRA_TEXT, url)
                 type = "text/plain"
             }
-
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
         }
@@ -73,7 +68,6 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun observeDetailMovie(){
         viewModel.detailResponse.observe(this, {
             loadPoster(it)
@@ -127,8 +121,8 @@ class DetailActivity : AppCompatActivity() {
 
     private fun navigationBack(){
         iv_back.setOnClickListener {
-            val intent =Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
+
 }
