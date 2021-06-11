@@ -17,7 +17,6 @@ class Repository {
         favoriteDatabase = FavoriteDatabase.getInstance()
     }
 
-
     fun getDetailMovie(id: Int): Observable<DetailResponse> {
         return RetrofitClient.instance.getDetailMovie(id)
     }
