@@ -13,6 +13,7 @@ import com.irzstudio.movieapps.databinding.ActivityDetailBinding
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
 import com.irzstudio.movieapps.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_detail.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 class DetailActivity : AppCompatActivity() {
@@ -20,9 +21,8 @@ class DetailActivity : AppCompatActivity() {
     private val binding: ActivityDetailBinding by lazy {
         ActivityDetailBinding.inflate(layoutInflater)
     }
-    private val viewModel: DetailViewModel by lazy {
-        ViewModelProviders.of(this).get(DetailViewModel::class.java)
-    }
+    private val viewModel: DetailViewModel by viewModel()
+
     private val adapterCast: CastAdapter by lazy {
         CastAdapter()
     }

@@ -8,17 +8,14 @@ import com.irzstudio.movieapps.model.favorite.FavoriteEntity
 import com.irzstudio.movieapps.model.search.SearchResponse
 import com.irzstudio.movieapps.model.trending.TrendingResponse
 import com.irzstudio.movieapps.model.upcoming.UpcomingResponse
+import com.irzstudio.movieapps.remote.Api
 import com.irzstudio.movieapps.remote.RetrofitClient
 import io.reactivex.Observable
 
-class Repository {
-    private var favoriteDatabase: FavoriteDatabase? = null
-    init {
-        favoriteDatabase = FavoriteDatabase.getInstance()
-    }
+class Repository(val api: Api, val favoriteDatabase: FavoriteDatabase) {
 
     fun getDetailMovie(id: Int): Observable<DetailResponse> {
-        return RetrofitClient.instance.getDetailMovie(id)
+        return api.getDetailMovie(id)
     }
 
     fun getCast(id: Int): Observable<CastResponse> {

@@ -19,8 +19,10 @@ import com.irzstudio.movieapps.model.discover.Discover
 import com.irzstudio.movieapps.model.trending.PosterTrending
 import com.irzstudio.movieapps.model.upcoming.PosterUpcoming
 import com.irzstudio.movieapps.ui.detail.DetailActivity
+import com.irzstudio.movieapps.ui.detail.DetailViewModel
 import com.irzstudio.movieapps.util.Constant.URL_IMAGE
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -28,9 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding: FragmentHomeBinding by lazy {
         FragmentHomeBinding.inflate(layoutInflater)
     }
-    private val viewModel: HomeViewModel by lazy {
-        ViewModelProviders.of(this).get(HomeViewModel::class.java)
-    }
+    private val viewModel: HomeViewModel by viewModel()
 
     private val adapterTrending: TrendingAdapter by lazy {
         TrendingAdapter()

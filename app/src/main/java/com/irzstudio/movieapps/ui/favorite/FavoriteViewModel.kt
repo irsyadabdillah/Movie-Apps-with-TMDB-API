@@ -8,14 +8,10 @@ import com.irzstudio.movieapps.model.favorite.FavoriteDatabase
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
 import io.reactivex.disposables.CompositeDisposable
 
-class FavoriteViewModel : ViewModel() {
+class FavoriteViewModel(val repository: Repository) : ViewModel() {
 
     private val _favoriteEntityList = MutableLiveData<ArrayList<FavoriteEntity>>()
     val favoriteEntityList: LiveData<ArrayList<FavoriteEntity>> = _favoriteEntityList
-
-    private val repository by lazy {
-        Repository()
-    }
 
     private var dataFavorite: ArrayList<FavoriteEntity> = ArrayList()
 

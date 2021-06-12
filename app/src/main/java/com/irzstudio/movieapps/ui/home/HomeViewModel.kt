@@ -16,7 +16,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(val repository: Repository): ViewModel() {
+
     private val _discoverResponseList = MutableLiveData<ArrayList<Discover>>()
     val discoverResponseList: LiveData<ArrayList<Discover>> = _discoverResponseList
 
@@ -28,10 +29,6 @@ class HomeViewModel : ViewModel() {
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
-
-    private val repository by lazy {
-        Repository()
-    }
 
     private val compositeDisposable by lazy {
         CompositeDisposable()

@@ -11,13 +11,13 @@ import com.irzstudio.movieapps.adapter.FavoriteAdapter
 import com.irzstudio.movieapps.listener.OnClickItemFavorite
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
 import com.irzstudio.movieapps.ui.detail.DetailActivity
+import com.irzstudio.movieapps.ui.detail.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_favorite.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
-    private val viewModel: FavoriteViewModel by lazy {
-        ViewModelProviders.of(this).get(FavoriteViewModel::class.java)
-    }
+    private val viewModel: FavoriteViewModel by viewModel()
 
     private val adapterFavorite: FavoriteAdapter by lazy {
         FavoriteAdapter()

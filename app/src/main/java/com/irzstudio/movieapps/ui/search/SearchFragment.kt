@@ -11,14 +11,15 @@ import com.irzstudio.movieapps.adapter.SearchAdapter
 import com.irzstudio.movieapps.listener.OnClickItemSearch
 import com.irzstudio.movieapps.model.search.SearchMovie
 import com.irzstudio.movieapps.ui.detail.DetailActivity
+import com.irzstudio.movieapps.ui.detail.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
-    private val viewModel: SearchViewModel by lazy {
-        ViewModelProviders.of(this).get(SearchViewModel::class.java)
-    }
+    private val viewModel: SearchViewModel by viewModel()
+
     private val adapterSearch: SearchAdapter by lazy {
         SearchAdapter()
     }

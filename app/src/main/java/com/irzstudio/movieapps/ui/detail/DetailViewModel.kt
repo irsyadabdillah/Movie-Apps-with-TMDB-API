@@ -15,7 +15,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel( val repository: Repository) : ViewModel() {
+
     private val _detailResponse = MutableLiveData<DetailResponse>()
     val detailResponse: LiveData<DetailResponse> = _detailResponse
 
@@ -28,9 +29,6 @@ class DetailViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
-    private val repository by lazy {
-        Repository()
-    }
 
     private val compositeDisposable by lazy {
         CompositeDisposable()
