@@ -6,6 +6,7 @@
 ## Library References
 
 - Retrofit
+- Koin
 - Room
 - MVVM
 - RXJava
