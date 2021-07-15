@@ -23,7 +23,7 @@ class AppController : Application() {
         }
 
         Realm.init(this)
-        INSTANCE = this
+
 
         val config = RealmConfiguration.Builder()
             .allowWritesOnUiThread(true)
@@ -34,13 +34,5 @@ class AppController : Application() {
 
     }
 
-    companion object{
-        private var INSTANCE: AppController? = null
 
-        @JvmStatic
-        fun getInstance() : Context{
-            return INSTANCE as AppController
-        }
-
-    }
 }

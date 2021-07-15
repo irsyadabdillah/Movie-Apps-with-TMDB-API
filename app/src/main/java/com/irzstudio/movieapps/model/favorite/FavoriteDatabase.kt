@@ -14,10 +14,10 @@ abstract class FavoriteDatabase : RoomDatabase() {
     companion object {
         private var INSTANCE: FavoriteDatabase? = null
 
-        fun getInstance(): FavoriteDatabase? {
+        fun getInstance(context: Context): FavoriteDatabase? {
             if (INSTANCE == null) {
                 synchronized(FavoriteDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(AppController.getInstance().applicationContext,
+                    INSTANCE = Room.databaseBuilder(context,
                     FavoriteDatabase::class.java, "favoritedata.db").allowMainThreadQueries().build()
                 }
             }

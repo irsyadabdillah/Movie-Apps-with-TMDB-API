@@ -12,7 +12,7 @@ val dataModule = module {
     }
 
     single {
-        FavoriteDatabase.getInstance()
+        FavoriteDatabase.getInstance(get())
     }
 
     factory {

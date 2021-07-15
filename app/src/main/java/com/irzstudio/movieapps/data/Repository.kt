@@ -19,23 +19,23 @@ class Repository(val api: Api, val favoriteDatabase: FavoriteDatabase) {
     }
 
     fun getCast(id: Int): Observable<CastResponse> {
-        return RetrofitClient.instance.getCast(id)
+        return api.getCast(id)
     }
 
     fun getDiscover(): Observable<DiscoverResponse> {
-        return RetrofitClient.instance.getDiscover()
+        return api.getDiscover()
     }
 
     fun getTrending(): Observable<TrendingResponse> {
-        return RetrofitClient.instance.getTrending()
+        return api.getTrending()
     }
 
     fun getUpcoming(): Observable<UpcomingResponse> {
-        return RetrofitClient.instance.getUpcoming()
+        return api.getUpcoming()
     }
 
     fun getMovieQuery(query: String?): Observable<SearchResponse> {
-        return RetrofitClient.instance.getSearchMovie(query.orEmpty())
+        return api.getSearchMovie(query.orEmpty())
     }
 
     fun saveMovie(favoriteEntity: FavoriteEntity) {
