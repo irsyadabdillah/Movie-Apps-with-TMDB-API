@@ -7,7 +7,7 @@
 
     <item
         android:drawable="@drawable/ic_favorite_fiiled"
-        android:state_checked="true"/>
+        android:state_checked="true" />
 
     <item
         android:drawable="@drawable/ic_favorite_outline"/>
