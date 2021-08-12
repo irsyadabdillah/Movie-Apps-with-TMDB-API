@@ -3,19 +3,17 @@ package com.irzstudio.movieapps.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.irzstudio.movieapps.data.Repository
+import androidx.lifecycle.viewModelScope
+import com.irzstudio.movieapps.data.Repository.Repository
 import com.irzstudio.movieapps.model.cast.Cast
-import com.irzstudio.movieapps.model.cast.CastResponse
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
-import com.irzstudio.movieapps.model.favorite.FavoriteDatabase
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
-import com.irzstudio.movieapps.remote.RetrofitClient
-import io.reactivex.disposables.CompositeDisposable
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailViewModel( val repository: Repository) : ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(val repository: Repository) : ViewModel() {
 
     private val _detailResponse = MutableLiveData<DetailResponse>()
     val detailResponse: LiveData<DetailResponse> = _detailResponse
@@ -30,24 +28,25 @@ class DetailViewModel( val repository: Repository) : ViewModel() {
     val errorMessage: LiveData<String> = _errorMessage
 
 
-    private val compositeDisposable by lazy {
-        CompositeDisposable()
+    fun requestDetailMovie(id: Int) = viewModelScope.launch {
+        repository.getDetailMovie(id).let {
+            if (it.isSuccessful) {
+                _detailResponse.postValue(it.body())
+            } else {
+                _errorMessage.postValue(it.message())
+            }
+        }
+
     }
 
-    fun requestDetailMovie(id: Int) {
-        val detailMovieDisposable = repository.getDetailMovie(id)
-            .doOnSubscribe { }
-            .doFinally { }
-            .subscribe({ _detailResponse.postValue(it) }, { _errorMessage.postValue(it.localizedMessage) })
-        compositeDisposable.add(detailMovieDisposable)
-    }
-
-    fun requestCast(id: Int) {
-        val castDisposable = repository.getCast(id)
-            .doOnSubscribe { }
-            .doFinally { }
-            .subscribe({ _castResponseList.postValue(it.cast) }, { _errorMessage.postValue(it.localizedMessage) })
-        compositeDisposable.add(castDisposable)
+    fun requestCast(id: Int) = viewModelScope.launch {
+        repository.getCast(id).let {
+            if (it.isSuccessful) {
+                _castResponseList.postValue(it.body()?.cast)
+            } else {
+                _errorMessage.postValue(it.message())
+            }
+        }
     }
 
     fun saveMovie() {
@@ -73,3 +72,4 @@ class DetailViewModel( val repository: Repository) : ViewModel() {
         _isfavorited.postValue(repository.checkMovie(detail.id))
     }
 }
+

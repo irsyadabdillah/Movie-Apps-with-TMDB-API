@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.activityViewModels
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
@@ -12,25 +12,20 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.irzstudio.movieapps.R
 import com.irzstudio.movieapps.adapter.TrendingAdapter
 import com.irzstudio.movieapps.adapter.UpcomingAdapter
-import com.irzstudio.movieapps.databinding.FragmentHomeBinding
 import com.irzstudio.movieapps.listener.OnClickItemTrending
 import com.irzstudio.movieapps.listener.OnClickItemUpcoming
 import com.irzstudio.movieapps.model.discover.Discover
 import com.irzstudio.movieapps.model.trending.PosterTrending
 import com.irzstudio.movieapps.model.upcoming.PosterUpcoming
 import com.irzstudio.movieapps.ui.detail.DetailActivity
-import com.irzstudio.movieapps.ui.detail.DetailViewModel
 import com.irzstudio.movieapps.util.Constant.URL_IMAGE
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.koin.android.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private val binding: FragmentHomeBinding by lazy {
-        FragmentHomeBinding.inflate(layoutInflater)
-    }
-    private val viewModel: HomeViewModel by viewModel()
+    private val viewModel: HomeViewModel by activityViewModels()
 
     private val adapterTrending: TrendingAdapter by lazy {
         TrendingAdapter()

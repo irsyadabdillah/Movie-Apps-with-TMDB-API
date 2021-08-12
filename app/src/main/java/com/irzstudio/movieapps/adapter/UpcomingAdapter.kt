@@ -7,15 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.irzstudio.movieapps.R
-import com.irzstudio.movieapps.listener.OnClickItemTrending
 import com.irzstudio.movieapps.listener.OnClickItemUpcoming
-import com.irzstudio.movieapps.model.trending.PosterTrending
 import com.irzstudio.movieapps.model.upcoming.PosterUpcoming
 import com.irzstudio.movieapps.util.Constant
-import kotlinx.android.synthetic.main.list_favorite.view.*
-import kotlinx.android.synthetic.main.list_trending.view.*
 import kotlinx.android.synthetic.main.list_upcoming.view.*
-import kotlinx.android.synthetic.main.list_upcoming.view.rating_bar
 
 class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder>() {
 

@@ -3,6 +3,7 @@ package com.irzstudio.movieapps.ui.detail
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -10,19 +11,22 @@ import com.irzstudio.movieapps.adapter.CastAdapter
 import com.irzstudio.movieapps.databinding.ActivityDetailBinding
 import com.irzstudio.movieapps.model.datailfilm.DetailResponse
 import com.irzstudio.movieapps.util.Constant.URL_IMAGE
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail.*
-import org.koin.android.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     private val binding: ActivityDetailBinding by lazy {
         ActivityDetailBinding.inflate(layoutInflater)
     }
-    private val viewModel: DetailViewModel by viewModel()
 
     private val adapterCast: CastAdapter by lazy {
         CastAdapter()
     }
+
+    private val viewModel : DetailViewModel by viewModels()
+
     private val id: Int by lazy {
         intent.getIntExtra("id", 0)
     }
@@ -39,9 +43,10 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel.requestCast(id)
         viewModel.requestDetailMovie(id)
+
     }
 
-    private fun shareMovie(detailResponse: DetailResponse){
+    private fun shareMovie(detailResponse: DetailResponse) {
         btn_share.setOnClickListener {
             val url = detailResponse.url
             val sendIntent: Intent = Intent().apply {
@@ -54,18 +59,19 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun addFavoriteMovie(){
+    private fun addFavoriteMovie() {
         cb_fav.setOnCheckedChangeListener { checkBox, isChecked ->
-            if (isChecked){
+            if (isChecked) {
                 viewModel.saveMovie()
                 Toast.makeText(this, "Movie added to favorite", Toast.LENGTH_SHORT).show()
-            }else{
+            } else {
                 viewModel.removeMovie()
                 Toast.makeText(this, "Movie removed from favorite", Toast.LENGTH_SHORT).show()
             }
         }
     }
-    private fun observeDetailMovie(){
+
+    private fun observeDetailMovie() {
         viewModel.detailResponse.observe(this, {
             loadPoster(it)
             loadDetail(it)
@@ -75,14 +81,14 @@ class DetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun observeIsFavorited(){
-        viewModel.isFavorited.observe(this,{
+    private fun observeIsFavorited() {
+        viewModel.isFavorited.observe(this, {
             cb_fav.isChecked = it
             addFavoriteMovie()
         })
     }
 
-    private fun observeCast(){
+    private fun observeCast() {
         viewModel.castResponseList.observe(this, {
             adapterCast.setDataCast(it)
         })
@@ -111,12 +117,12 @@ class DetailActivity : AppCompatActivity() {
         binding.txtDurationDetail.text = duration
     }
 
-    private fun setListCast(){
+    private fun setListCast() {
         binding.rvCast.setHasFixedSize(true)
         binding.rvCast.adapter = adapterCast
     }
 
-    private fun navigationBack(){
+    private fun navigationBack() {
         iv_back.setOnClickListener {
             finish()
         }

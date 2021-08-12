@@ -5,20 +5,19 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.activityViewModels
 import com.irzstudio.movieapps.R
 import com.irzstudio.movieapps.adapter.SearchAdapter
 import com.irzstudio.movieapps.listener.OnClickItemSearch
 import com.irzstudio.movieapps.model.search.SearchMovie
 import com.irzstudio.movieapps.ui.detail.DetailActivity
-import com.irzstudio.movieapps.ui.detail.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.koin.android.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
-    private val viewModel: SearchViewModel by viewModel()
+    private val viewModel: SearchViewModel by activityViewModels()
 
     private val adapterSearch: SearchAdapter by lazy {
         SearchAdapter()

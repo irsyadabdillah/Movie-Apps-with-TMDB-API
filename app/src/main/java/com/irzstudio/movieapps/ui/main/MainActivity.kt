@@ -6,8 +6,10 @@ import com.irzstudio.movieapps.R
 import com.irzstudio.movieapps.ui.favorite.FavoriteFragment
 import com.irzstudio.movieapps.ui.home.HomeFragment
 import com.irzstudio.movieapps.ui.search.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
 

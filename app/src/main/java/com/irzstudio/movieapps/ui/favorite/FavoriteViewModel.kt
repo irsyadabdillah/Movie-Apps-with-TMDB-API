@@ -3,12 +3,13 @@ package com.irzstudio.movieapps.ui.favorite
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.irzstudio.movieapps.data.Repository
-import com.irzstudio.movieapps.model.favorite.FavoriteDatabase
+import com.irzstudio.movieapps.data.Repository.Repository
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
-import io.reactivex.disposables.CompositeDisposable
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FavoriteViewModel(val repository: Repository) : ViewModel() {
+@HiltViewModel
+class FavoriteViewModel @Inject constructor(val repository: Repository) : ViewModel() {
 
     private val _favoriteEntityList = MutableLiveData<ArrayList<FavoriteEntity>>()
     val favoriteEntityList: LiveData<ArrayList<FavoriteEntity>> = _favoriteEntityList

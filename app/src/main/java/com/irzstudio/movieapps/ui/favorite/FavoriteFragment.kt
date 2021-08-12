@@ -5,19 +5,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.activityViewModels
 import com.irzstudio.movieapps.R
 import com.irzstudio.movieapps.adapter.FavoriteAdapter
 import com.irzstudio.movieapps.listener.OnClickItemFavorite
 import com.irzstudio.movieapps.model.favorite.FavoriteEntity
 import com.irzstudio.movieapps.ui.detail.DetailActivity
-import com.irzstudio.movieapps.ui.detail.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favorite.*
-import org.koin.android.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
-    private val viewModel: FavoriteViewModel by viewModel()
+    private val viewModel: FavoriteViewModel by activityViewModels()
 
     private val adapterFavorite: FavoriteAdapter by lazy {
         FavoriteAdapter()

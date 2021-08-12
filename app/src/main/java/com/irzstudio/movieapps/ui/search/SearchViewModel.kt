@@ -3,16 +3,15 @@ package com.irzstudio.movieapps.ui.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.irzstudio.movieapps.data.Repository
+import androidx.lifecycle.viewModelScope
+import com.irzstudio.movieapps.data.Repository.Repository
 import com.irzstudio.movieapps.model.search.SearchMovie
-import com.irzstudio.movieapps.model.search.SearchResponse
-import com.irzstudio.movieapps.remote.RetrofitClient
-import io.reactivex.disposables.CompositeDisposable
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(val repository: Repository) : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor(val repository: Repository) : ViewModel() {
 
     private val _searchMovieList = MutableLiveData<ArrayList<SearchMovie>>()
     val searchMovieList: LiveData<ArrayList<SearchMovie>> = _searchMovieList
@@ -20,17 +19,14 @@ class SearchViewModel(val repository: Repository) : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
-    private val compositeDisposable by lazy {
-        CompositeDisposable()
-    }
 
-    fun requestMovieQuery(query: String?) {
-        val movieQueryDisposable = repository.getMovieQuery(query.orEmpty())
-            .doOnSubscribe { }
-            .doFinally { }
-            .subscribe(
-                { _searchMovieList.postValue(it.results) },
-                { _errorMessage.postValue(it.localizedMessage) })
-        compositeDisposable.add(movieQueryDisposable)
+    fun requestMovieQuery(query: String?) = viewModelScope.launch {
+        repository.getMovieQuery(query.orEmpty()).let {
+            if (it.isSuccessful) {
+                _searchMovieList.postValue(it.body()?.results)
+            } else {
+                _errorMessage.postValue(it.message())
+            }
+        }
     }
 }

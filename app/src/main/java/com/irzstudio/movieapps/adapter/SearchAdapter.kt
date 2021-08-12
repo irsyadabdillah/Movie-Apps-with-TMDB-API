@@ -9,10 +9,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.irzstudio.movieapps.R
 import com.irzstudio.movieapps.listener.OnClickItemSearch
 import com.irzstudio.movieapps.model.search.SearchMovie
-import com.irzstudio.movieapps.model.search.SearchResponse
 import com.irzstudio.movieapps.util.Constant
 import kotlinx.android.synthetic.main.list_search.view.*
-import kotlinx.android.synthetic.main.list_trending.view.*
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
